@@ -3,151 +3,166 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Water Savior</title>
-
+  <meta name="description" content="Water Savior is a charity: water inspired river cleanup game with score tracking, a timer, difficulty levels, obstacles, reset controls, and win celebration.">
+  <title>Water Savior | Clean Water Mission</title>
   <link rel="stylesheet" href="style.css">
-
-  <!-- Confetti -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to game content</a>
 
-  <!-- TITLE SCREEN -->
-  <section id="title-screen" class="screen active">
+  <main id="main-content">
+    <section id="title-screen" class="screen active" aria-labelledby="title-heading">
+      <div class="phone-shell title-shell">
+        <p class="eyebrow">charity: water campus edition</p>
+        <div class="drop-mark" aria-hidden="true">💧</div>
+        <h1 id="title-heading">Water <span>Savior</span></h1>
+        <p class="lede">Tap to clean rivers, earn impact points, and unlock a campus reward.</p>
 
-    <div class="title-card">
-      <h1>💧 Water Savior</h1>
+        <div class="transformation-preview" aria-label="River transformation preview">
+          <span>Polluted</span>
+          <span aria-hidden="true">→</span>
+          <span>Clean</span>
+        </div>
 
-      <p>
-        Clean polluted rivers and help provide clean water.
-      </p>
-
-      <button id="startBtn" class="primary-btn">
-        Start Game
-      </button>
-
-      <div class="branding">
-        charity: water
+        <button id="startBtn" class="button button-primary" type="button">Start Mission</button>
+        <p class="brand-line">Powered by charity: water</p>
       </div>
-    </div>
+    </section>
 
-  </section>
+    <section id="mission-screen" class="screen" aria-labelledby="mission-heading" hidden>
+      <div class="panel mission-panel">
+        <div class="panel-header">
+          <p class="eyebrow">Select mission</p>
+          <h2 id="mission-heading">Choose Your River</h2>
+        </div>
 
-  <!-- MISSION SCREEN -->
-  <section id="mission-screen" class="screen">
+        <div class="difficulty-list" role="list" aria-label="Mission difficulty options">
+          <article class="difficulty-card" role="listitem">
+            <div>
+              <h3>Campus Creek <span>Easy</span></h3>
+              <p>Clear 20 trash items in 60 seconds.</p>
+            </div>
+            <button class="button button-secondary difficultyBtn" type="button" data-level="basic">Choose Easy</button>
+          </article>
 
-    <div class="card">
+          <article class="difficulty-card" role="listitem">
+            <div>
+              <h3>City River Run <span>Medium</span></h3>
+              <p>Remove 30 items while avoiding rain and wind hazards.</p>
+            </div>
+            <button class="button button-secondary difficultyBtn" type="button" data-level="medium">Choose Medium</button>
+          </article>
 
-      <h2>Mission Selection</h2>
+          <article class="difficulty-card" role="listitem">
+            <div>
+              <h3>Ocean Outreach <span>Hard</span></h3>
+              <p>Restore the river through pollution clouds and rival crews.</p>
+            </div>
+            <button class="button button-secondary difficultyBtn" type="button" data-level="hard">Choose Hard</button>
+          </article>
+        </div>
 
-      <div class="difficulty-card">
-        <h3>Basic</h3>
-        <p>Remove 20 trash items in 60 seconds</p>
-        <button onclick="selectDifficulty('basic')">
-          Select Basic
-        </button>
+        <button id="missionBackBtn" class="button button-quiet" type="button">Back to Title</button>
       </div>
+    </section>
 
-      <div class="difficulty-card">
-        <h3>Medium</h3>
-        <p>Remove 30 trash items</p>
-        <p>Rain & wind obstacles</p>
-        <button onclick="selectDifficulty('medium')">
-          Select Medium
-        </button>
+    <section id="game-screen" class="screen game-screen" aria-labelledby="game-heading" hidden>
+      <div class="game-app">
+        <header class="game-header">
+          <div>
+            <p class="eyebrow">Water Savior</p>
+          <h2 id="game-heading" tabindex="-1">Clean Water Mission</h2>
+          </div>
+          <div class="stat-strip" aria-label="Game status">
+            <span>Score <strong id="score">0</strong></span>
+            <span>Time <strong id="timer">60</strong>s</span>
+            <span>Level <strong id="difficultyLabel">Easy</strong></span>
+          </div>
+        </header>
+
+        <aside class="mission-sidebar" aria-label="Mission progress">
+          <section class="sidebar-block" aria-labelledby="goal-heading">
+            <h3 id="goal-heading">Mission Goals</h3>
+            <ul class="goal-list">
+              <li><span class="dot dot-green" aria-hidden="true"></span><span id="goalTrash">Remove 20 trash items</span></li>
+              <li><span class="dot dot-blue" aria-hidden="true"></span>Avoid obstacles</li>
+              <li><span class="dot dot-yellow" aria-hidden="true"></span>Complete in 60 seconds</li>
+            </ul>
+          </section>
+
+          <section class="sidebar-block" aria-labelledby="impact-heading">
+            <h3 id="impact-heading">Water Impact</h3>
+            <div class="meter-row">
+              <span id="riverStatus">Very Polluted</span>
+              <strong><span id="health">0</span>%</strong>
+            </div>
+            <div class="meter" aria-hidden="true">
+              <span id="healthBar"></span>
+            </div>
+          </section>
+
+          <section class="sidebar-block" aria-labelledby="achievement-heading">
+            <h3 id="achievement-heading">Achievements</h3>
+            <ul id="achievementList" class="achievement-list">
+              <li>Clean Streak locked</li>
+              <li>Fast Responder locked</li>
+              <li>River Restorer locked</li>
+            </ul>
+          </section>
+        </aside>
+
+        <div class="play-column">
+          <div id="feedback" class="feedback" role="status" aria-live="polite">Choose trash items to begin cleaning.</div>
+
+          <div id="river" class="river very-polluted" role="application" aria-label="River cleanup area. Use Tab to focus cleanup items and Enter or Space to collect them.">
+            <div class="river-shine" aria-hidden="true"></div>
+            <div class="river-current" aria-hidden="true"></div>
+          </div>
+        </div>
+
+        <nav class="controls" aria-label="Game controls">
+          <button id="homeBtn" class="button button-quiet" type="button">Home</button>
+          <button id="pauseBtn" class="button button-secondary" type="button" aria-pressed="false">Pause</button>
+          <button id="resetBtn" class="button button-primary" type="button">Reset Game</button>
+        </nav>
       </div>
+    </section>
 
-      <div class="difficulty-card">
-        <h3>Hard</h3>
-        <p>Remove 40 trash items</p>
-        <p>Lightning & pollution clouds</p>
-        <button onclick="selectDifficulty('hard')">
-          Select Hard
-        </button>
+    <section id="results-screen" class="screen" aria-labelledby="resultTitle" hidden>
+      <div class="panel result-panel">
+        <div id="confettiLayer" class="confetti-layer" aria-hidden="true"></div>
+        <p class="trophy" aria-hidden="true">🏆</p>
+        <h2 id="resultTitle">Mission Complete!</h2>
+        <p id="resultMessage" class="lede">River restored. Amazing work!</p>
+
+        <dl class="result-grid" aria-label="Mission results">
+          <div>
+            <dt>Clean water points</dt>
+            <dd id="finalScore">0</dd>
+          </div>
+          <div>
+            <dt>Trash removed</dt>
+            <dd id="finalTrash">0</dd>
+          </div>
+          <div>
+            <dt>River health</dt>
+            <dd><span id="finalHealth">0</span>%</dd>
+          </div>
+        </dl>
+
+        <div id="rewardBox" class="reward-box">
+          <strong>Campus Reward Unlocked</strong>
+          <span>Free campus cafe drink claim code: CLEAN</span>
+        </div>
+
+        <div class="result-actions">
+          <button id="playAgainBtn" class="button button-primary" type="button">Play Again</button>
+          <button id="nextLevelBtn" class="button button-secondary" type="button">Next Level</button>
+        </div>
       </div>
-
-    </div>
-
-  </section>
-
-  <!-- GAME SCREEN -->
-  <section id="game-screen" class="screen">
-
-    <header class="stats">
-
-      <div>
-        Score:
-        <span id="score">0</span>
-      </div>
-
-      <div>
-        Time:
-        <span id="timer">60</span>
-      </div>
-
-      <div>
-        River Health:
-        <span id="health">0</span>%
-      </div>
-
-    </header>
-
-    <div id="feedback">
-      Start cleaning the river!
-    </div>
-
-    <div id="river">
-
-      <div id="river-label">
-        Very Polluted
-      </div>
-
-    </div>
-
-    <div class="controls">
-
-      <button id="pauseBtn">
-        Pause
-      </button>
-
-      <button id="resetBtn">
-        Reset Game
-      </button>
-
-    </div>
-
-  </section>
-
-  <!-- RESULTS SCREEN -->
-  <section id="results-screen" class="screen">
-
-    <div class="card">
-
-      <h2 id="resultTitle">
-        Mission Complete!
-      </h2>
-
-      <p>
-        Total Score:
-        <span id="finalScore"></span>
-      </p>
-
-      <p>
-        River Health:
-        <span id="finalHealth"></span>%
-      </p>
-
-      <p id="resultMessage"></p>
-
-      <button onclick="restartGame()">
-        Play Again
-      </button>
-
-    </div>
-
-  </section>
+    </section>
+  </main>
 
   <script src="script.js"></script>
-
 </body>
 </html>
