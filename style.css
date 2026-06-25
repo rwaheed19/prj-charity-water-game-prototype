@@ -1,0 +1,155 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, sans-serif;
+    background:#f4f8fb;
+    color:#222;
+}
+
+.screen{
+    display:none;
+    min-height:100vh;
+    padding:20px;
+}
+
+.active{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.title-card,
+.card{
+    width:100%;
+    max-width:700px;
+    text-align:center;
+    background:white;
+    padding:30px;
+    border-radius:16px;
+    box-shadow:0 4px 12px rgba(0,0,0,.15);
+}
+
+h1{
+    color:#2E9DF7;
+    margin-bottom:20px;
+}
+
+h2{
+    color:#2E9DF7;
+    margin-bottom:20px;
+}
+
+.primary-btn,
+button{
+    background:#FFC907;
+    border:none;
+    padding:12px 24px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+    margin-top:15px;
+}
+
+button:hover{
+    opacity:.9;
+}
+
+.branding{
+    margin-top:30px;
+    color:#2E9DF7;
+    font-weight:bold;
+}
+
+.difficulty-card{
+    background:#f8f8f8;
+    padding:20px;
+    margin:15px 0;
+    border-radius:10px;
+}
+
+.stats{
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    background:#2E9DF7;
+    color:white;
+    padding:15px;
+    font-weight:bold;
+}
+
+#feedback{
+    text-align:center;
+    padding:15px;
+    font-size:1.2rem;
+    font-weight:bold;
+}
+
+#river{
+    position:relative;
+    width:90%;
+    max-width:900px;
+    height:500px;
+    margin:20px auto;
+    border-radius:16px;
+    overflow:hidden;
+    background:#6b4f2a;
+    transition:background 1s;
+}
+
+#river-label{
+    position:absolute;
+    top:10px;
+    left:10px;
+    background:white;
+    padding:8px 12px;
+    border-radius:8px;
+}
+
+.item{
+    position:absolute;
+    width:70px;
+    height:70px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:2rem;
+    cursor:pointer;
+    user-select:none;
+    border-radius:50%;
+    background:rgba(255,255,255,.3);
+}
+
+.good{
+    border:3px solid #4FCB53;
+}
+
+.bad{
+    border:3px solid #F5402C;
+}
+
+.controls{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+}
+
+@media(max-width:768px){
+
+    .stats{
+        flex-direction:column;
+        gap:10px;
+    }
+
+    #river{
+        height:400px;
+    }
+
+    .item{
+        width:60px;
+        height:60px;
+    }
+}

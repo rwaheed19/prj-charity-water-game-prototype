@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Water Savior</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+  <!-- TITLE SCREEN -->
+  <section id="title-screen" class="screen active">
+
+    <div class="title-card">
+      <h1>💧 Water Savior</h1>
+
+      <p>
+        Clean polluted rivers and help provide clean water.
+      </p>
+
+      <button id="startBtn" class="primary-btn">
+        Start Game
+      </button>
+
+      <div class="branding">
+        charity: water
+      </div>
+    </div>
+
+  </section>
+
+  <!-- MISSION SCREEN -->
+  <section id="mission-screen" class="screen">
+
+    <div class="card">
+
+      <h2>Mission Selection</h2>
+
+      <div class="difficulty-card">
+        <h3>Basic</h3>
+        <p>Remove 20 trash items in 60 seconds</p>
+        <button onclick="selectDifficulty('basic')">
+          Select Basic
+        </button>
+      </div>
+
+      <div class="difficulty-card">
+        <h3>Medium</h3>
+        <p>Remove 30 trash items</p>
+        <p>Rain & wind obstacles</p>
+        <button onclick="selectDifficulty('medium')">
+          Select Medium
+        </button>
+      </div>
+
+      <div class="difficulty-card">
+        <h3>Hard</h3>
+        <p>Remove 40 trash items</p>
+        <p>Lightning & pollution clouds</p>
+        <button onclick="selectDifficulty('hard')">
+          Select Hard
+        </button>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- GAME SCREEN -->
+  <section id="game-screen" class="screen">
+
+    <header class="stats">
+
+      <div>
+        Score:
+        <span id="score">0</span>
+      </div>
+
+      <div>
+        Time:
+        <span id="timer">60</span>
+      </div>
+
+      <div>
+        River Health:
+        <span id="health">0</span>%
+      </div>
+
+    </header>
+
+    <div id="feedback">
+      Start cleaning the river!
+    </div>
+
+    <div id="river">
+
+      <div id="river-label">
+        Very Polluted
+      </div>
+
+    </div>
+
+    <div class="controls">
+
+      <button id="pauseBtn">
+        Pause
+      </button>
+
+      <button id="resetBtn">
+        Reset Game
+      </button>
+
+    </div>
+
+  </section>
+
+  <!-- RESULTS SCREEN -->
+  <section id="results-screen" class="screen">
+
+    <div class="card">
+
+      <h2 id="resultTitle">
+        Mission Complete!
+      </h2>
+
+      <p>
+        Total Score:
+        <span id="finalScore"></span>
+      </p>
+
+      <p>
+        River Health:
+        <span id="finalHealth"></span>%
+      </p>
+
+      <p id="resultMessage"></p>
+
+      <button onclick="restartGame()">
+        Play Again
+      </button>
+
+    </div>
+
+  </section>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
